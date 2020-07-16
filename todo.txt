@@ -1,0 +1,5 @@
+ 1. Criar uma função carregarFornecedor, usando a mesma lógica que foi feito na função carregarEstoque. Inclusive vai ser até menor, por não existir tantas informações
+ 2. Criar a função listarProdutosFornecedor(). Neste caso, aproveita-se o código criado na função listar() e faz a mesma coisa
+ 3. Criar função repassarProduto(). Essa função vai receber o nome do produto e a quantidade que se deseja repassar. Ela vai retirar itens de dentro do arquivo fornecedor.csv, desde que a quantidade que seja pedida para retirar seja inferior à quantidade que o fornecedor tem. A lógica é a mesma de quando retiramos um produto do estoque e colocamos na sacola. Se der parar retirar, dentro dessa função a gente chamaria outra função que será implementada, chamada reabastecer(), que basicamente funciona de forma "inversa" ao que foi usado na sacola, já que coloca ao invés de retirar
+
+ Verificar a entrada do nome na hora do reabastecimento

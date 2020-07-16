@@ -15,6 +15,7 @@ Estabelecimento::~Estabelecimento()
 {
     caixa();
     gerarCaixa();
+    atualizarEstoque();
 }
 
 void Estabelecimento::listar()
@@ -148,6 +149,19 @@ void Estabelecimento::carregarEstoque()
     return;
 }
 
+void Estabelecimento::reabastecer(string nomeProduto, int quantidade)
+{
+    for (auto &i : produtos)
+    {
+        if (i.nome == nomeProduto)
+        {
+            i.quantidade += quantidade;
+        }
+    }
+
+    return;
+}
+
 void Estabelecimento::gerarCaixa()
 {
     double total;
@@ -175,6 +189,35 @@ void Estabelecimento::gerarCaixa()
 
     file_stream_in << total << endl;
 
+
+    file_stream_in.close();
+}
+
+void Estabelecimento::atualizarEstoque()
+{
+    ofstream file_stream_in("estoque_atualizado.csv"); //ofstream: Stream class to write into files
+
+    file_stream_in << "COD,PRODUTO,UNIDADE DE MEDIDA,PREÇO(R$),QUANTIDADE" << endl;
+
+    for (auto i : produtos)
+    {
+        file_stream_in << i.codigo;
+        file_stream_in << ',';
+
+        file_stream_in << i.nome;
+        file_stream_in << ',';
+
+        file_stream_in << i.unidadeMedida;
+        file_stream_in << ',';
+
+        file_stream_in << "R$ ";
+        file_stream_in << i.preco;
+        file_stream_in << ',';
+
+        file_stream_in << i.quantidade;
+
+        file_stream_in << endl;
+    }
 
     file_stream_in.close();
 }

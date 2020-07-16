@@ -1,14 +1,8 @@
-/*
-Conter menu inicializador e os objetos clientes
-- adicionar saldo do cliente;
-- verificar os produtos da loja;
-- ver conteudo da sacola do cliente;
-- finalizar as compras => inicializar novo cliente ? prosseguir : encerrar
-*/
-
 #include <iostream>
+
 #include "cliente.hpp"
 #include "estabelecimento.hpp"
+#include "fornecedor.hpp"
 
 int main(int argc, char const *argv[])
 {
@@ -16,6 +10,7 @@ int main(int argc, char const *argv[])
     char novoCliente;
     Estabelecimento supermercado;
     Cliente cliente;
+    Fornecedor fornecedor;
 
     do
     {
@@ -26,6 +21,10 @@ int main(int argc, char const *argv[])
         cout << "3 - Adicionar produto a sacola (Efetua a compra)." << endl;
 
         cout << "4 - Verificar o conteúdo da sacola." << endl;
+
+        cout << "5 - Listar produtos do fornecedor." << endl;
+
+        cout << "6 - Solicitar o reabastecimento de um produto." << endl;
 
         cout << "9 - Finalizar compras." << endl;
 
@@ -47,6 +46,14 @@ int main(int argc, char const *argv[])
         else if (opcao == '4')
         {
             cliente.verSacola();
+        }
+        else if (opcao == '5')
+        {
+            fornecedor.listarProdutos();
+        }
+        else if (opcao == '6')
+        {
+            fornecedor.repassarProdutos(supermercado);
         }
         else if (opcao == '9')
         {
