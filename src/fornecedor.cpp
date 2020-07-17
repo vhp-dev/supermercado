@@ -45,6 +45,8 @@ void Fornecedor::repassarProdutos(Estabelecimento &supermercado)
     {
         if (i.nome == nomeProduto)
         {
+            cout << "Digite a quantidade: ";
+            cin >> quantidade;
             if (quantidade < 0)
             {
                 cout << "Quantidade inválida!" << endl;
@@ -54,8 +56,6 @@ void Fornecedor::repassarProdutos(Estabelecimento &supermercado)
                 cout << "Quantidade superior ao que o fornecedor possui. O reabastecimento não foi realizado." << endl;
                 return;
             }
-            cout << "Digite a quantidade: ";
-            cin >> quantidade;
             supermercado.reabastecer(nomeProduto, quantidade);
             i.quantidade -= quantidade;
             return;
