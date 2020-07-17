@@ -18,10 +18,17 @@ Fornecedor::~Fornecedor()
 
 void Fornecedor::listarProdutos()
 {
+    cout << "==============================  FORNECEDOR  ==============================" << endl;
+    cout << endl;
+
     for (auto &i : produtos)
     {
-        cout << i.nome << " " << i.quantidade << endl;
+        cout << "Produto: " << i.nome << " - Quantidade: " << i.quantidade << endl;
+        cout << endl;
     }
+
+    cout << "========================================================================" << endl;
+    cout << endl;
 
     return;
 }
@@ -33,17 +40,22 @@ void Fornecedor::repassarProdutos(Estabelecimento &supermercado)
 
     cout << "Digite o nome do produto: ";
     cin >> nomeProduto;
-    cout << "Digite a quantidade: ";
-    cin >> quantidade;
 
     for (auto &i : produtos)
     {
         if (i.nome == nomeProduto)
         {
+            cout << "Digite a quantidade: ";
+            cin >> quantidade;
             supermercado.reabastecer(nomeProduto, quantidade);
             i.quantidade -= quantidade;
+            return;
         }
     }
+
+    cout << endl;
+    cout << "!!! O fornecedor não trabalha com " << nomeProduto << endl;
+    cout << endl;
 
     return;
 }

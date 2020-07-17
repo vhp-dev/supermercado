@@ -1,11 +1,10 @@
-#include "estabelecimento.hpp"
-
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
 #include <string>
 
+#include "estabelecimento.hpp"
 Estabelecimento::Estabelecimento() : produtos(), vendas()
 {
     carregarEstoque();
@@ -20,7 +19,8 @@ Estabelecimento::~Estabelecimento()
 
 void Estabelecimento::listar()
 {
-    cout << "-- LISTA DE PRODUTOS DISPONIVEIS NA LOJA --" << endl;
+    cout << "==============================  PRODUTOS  ==============================" << endl;
+    cout << endl;
 
     for (auto &it : produtos)
     {
@@ -35,7 +35,8 @@ void Estabelecimento::listar()
         }
     }
 
-    cout << "-- FIM DA LISTA DE PRODUTOS DA LOJA --" << endl;
+    cout << "========================================================================" << endl;
+    cout << endl;
 }
 
 void Estabelecimento::vender(int codigo)
@@ -102,15 +103,23 @@ void Estabelecimento::caixa()
     double totalItem;
     double total;
 
+    cout << endl;
+    cout << "===========================  PRODUTOS VENDIDOS ===========================" << endl;
+    cout << endl;
+
     for (auto &i : vendas)
     {
-        cout << i.nome << " ";
-        cout << i.quantidade << endl;
+        cout << "Nome do produto: " << i.nome << " - Quantidade: " << i.quantidade << endl;
         totalItem = i.preco * i.quantidade;
         total += totalItem;
     }
 
-    cout << "Total vendido: " << fixed << setprecision(2) << total << endl;
+    cout << endl;
+    cout << "==========================================================================" << endl;
+    cout << endl;
+
+    cout << " ==> Total vendido: " << fixed << setprecision(2) << total << endl;
+    return;
 }
 
 void Estabelecimento::carregarEstoque()

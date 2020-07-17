@@ -109,6 +109,9 @@ void Cliente::comprar(Estabelecimento &supermercado, int codigo)
 
 void Cliente::verSacola()
 {
+    cout << "==============================  SACOLA  ==============================" << endl;
+    cout << endl;
+
     if (sacola.empty())
     {
         cout << "Sacola está vazia" << endl;
@@ -120,6 +123,9 @@ void Cliente::verSacola()
             cout << "Nome do produto: " << i.nome << " - Quantidade: " << i.quantidade << endl;
         }
     }
+
+    cout << "======================================================================" << endl;
+    cout << endl;
 }
 
 void Cliente::registrar()
