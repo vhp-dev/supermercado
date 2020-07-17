@@ -40,16 +40,18 @@ void Cliente::comprar(Estabelecimento &supermercado, int codigo)
     bool naSacola;
     Produto produtoSacola;
 
-    for (std::list<Produto>::iterator it = supermercado.produtos.begin(); it != supermercado.produtos.end(); it++)
+    
+
+    for (auto &it : supermercado.produtos)
     {
-        if (it->codigo == codigo)
+        if (it.codigo == codigo)
         {
-            if (it->preco > saldo)
+            if (it.preco > saldo)
             {
                 cout << "Saldo insuficiente." << endl;
                 return;
             }
-            else if (it->quantidade == 0)
+            else if (it.quantidade == 0)
             {
                 cout << "Produto fora de estoque." << endl;
                 return;
@@ -60,10 +62,10 @@ void Cliente::comprar(Estabelecimento &supermercado, int codigo)
 
                 if (sacola.empty())
                 {
-                    produtoSacola.codigo = it->codigo;
-                    produtoSacola.nome = it->nome;
-                    produtoSacola.unidadeMedida = it->unidadeMedida;
-                    produtoSacola.preco = it->preco;
+                    produtoSacola.codigo = it.codigo;
+                    produtoSacola.nome = it.nome;
+                    produtoSacola.unidadeMedida = it.unidadeMedida;
+                    produtoSacola.preco = it.preco;
                     produtoSacola.quantidade = 1;
 
                     sacola.push_back(produtoSacola);
@@ -87,18 +89,18 @@ void Cliente::comprar(Estabelecimento &supermercado, int codigo)
                     }
                     if (naSacola == false)
                     {
-                        produtoSacola.codigo = it->codigo;
-                        produtoSacola.nome = it->nome;
-                        produtoSacola.unidadeMedida = it->unidadeMedida;
-                        produtoSacola.preco = it->preco;
+                        produtoSacola.codigo = it.codigo;
+                        produtoSacola.nome = it.nome;
+                        produtoSacola.unidadeMedida = it.unidadeMedida;
+                        produtoSacola.preco = it.preco;
                         produtoSacola.quantidade = 1;
 
                         sacola.push_back(produtoSacola);
                     }
                 }
 
-                it->quantidade -= 1;
-                saldo -= it->preco;
+                it.quantidade -= 1;
+                saldo -= it.preco;
             }
         }
     }

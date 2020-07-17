@@ -5,8 +5,6 @@
 #include "estabelecimento.hpp"
 
 #include <string>
-#include <vector>
-#include <list>
 
 using namespace std;
 
@@ -17,7 +15,7 @@ class Cliente
     ~Cliente();
 
     double saldo; //Quanto o cliente tem de dinheiro e pode gastar nas compras
-    vector<Produto> sacola; //Todas as compras do cliente
+    vector_supermercado<Produto> sacola; //Todas as compras do cliente
     static int idCliente;
 
     void adicionarSaldo(); //Adiciona valor ao saldo do cliente

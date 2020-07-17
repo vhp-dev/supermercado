@@ -78,7 +78,7 @@ void Fornecedor::lerArquivo()
 
 void Fornecedor::atualizarFornecedor()
 {
-    ofstream file_stream_in("fornecedor_atualizado.csv"); //ofstream: Stream class to write into files
+    ofstream file_stream_in("fornecedor.csv"); //ofstream: Stream class to write into files
 
     file_stream_in << "PRODUTO,QUANTIDADE" << endl;
 

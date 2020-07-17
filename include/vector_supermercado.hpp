@@ -77,6 +77,13 @@ class vector_supermercado{
             return &elements[size];
         }
 
+        T* clear(){
+            delete[] this->elements;
+            this->capacity = 1;
+            this->size = 0;
+            this->elements = new T[capacity]; 
+        }
+
 
 };
 

@@ -22,15 +22,15 @@ void Estabelecimento::listar()
 {
     cout << "-- LISTA DE PRODUTOS DISPONIVEIS NA LOJA --" << endl;
 
-    for (std::list<Produto>::iterator it = produtos.begin(); it != produtos.end(); it++)
+    for (auto &it : produtos)
     {
-        if (it->quantidade > 0)
+        if (it.quantidade > 0)
         {
-            cout << "Código: " << it->codigo << endl;
-            cout << "Nome do produto: " << it->nome << endl;
-            cout << "Unidade de medida: " << it->unidadeMedida << endl;
-            cout << "Preço: " << "R$ " << fixed << setprecision(2) <<it->preco << endl;
-            cout << "Quantidade em estoque: " << it->quantidade << endl;
+            cout << "Código: " << it.codigo << endl;
+            cout << "Nome do produto: " << it.nome << endl;
+            cout << "Unidade de medida: " << it.unidadeMedida << endl;
+            cout << "Preço: " << "R$ " << fixed << setprecision(2) <<it.preco << endl;
+            cout << "Quantidade em estoque: " << it.quantidade << endl;
             cout << endl;
         }
     }
@@ -42,11 +42,12 @@ void Estabelecimento::vender(int codigo)
 {
     bool emVendas;
     Produto produtoVenda;
-    for (list<Produto>::iterator it = produtos.begin(); it != produtos.end(); it++)
+
+    for (auto &it : produtos)
     {
-        if (it->codigo == codigo)
+        if (it.codigo == codigo)
         {
-           if (it->quantidade == 0)
+           if (it.quantidade == 0)
             {
                 cout << "Produto fora de estoque." << endl;
             }    
@@ -54,10 +55,10 @@ void Estabelecimento::vender(int codigo)
             {
                  if (vendas.empty())
                 {
-                    produtoVenda.codigo = it->codigo;
-                    produtoVenda.nome = it->nome;
-                    produtoVenda.unidadeMedida = it->unidadeMedida;
-                    produtoVenda.preco = it->preco;
+                    produtoVenda.codigo = it.codigo;
+                    produtoVenda.nome = it.nome;
+                    produtoVenda.unidadeMedida = it.unidadeMedida;
+                    produtoVenda.preco = it.preco;
                     produtoVenda.quantidade = 1;
 
                     vendas.push_back(produtoVenda);
@@ -82,10 +83,10 @@ void Estabelecimento::vender(int codigo)
                     }
                     if (emVendas == false)
                     {
-                        produtoVenda.codigo = it->codigo;
-                        produtoVenda.nome = it->nome;
-                        produtoVenda.unidadeMedida = it->unidadeMedida;
-                        produtoVenda.preco = it->preco;
+                        produtoVenda.codigo = it.codigo;
+                        produtoVenda.nome = it.nome;
+                        produtoVenda.unidadeMedida = it.unidadeMedida;
+                        produtoVenda.preco = it.preco;
                         produtoVenda.quantidade = 1;
 
                         vendas.push_back(produtoVenda);
@@ -101,11 +102,11 @@ void Estabelecimento::caixa()
     double totalItem;
     double total;
 
-    for (vector<Produto>::iterator it = vendas.begin(); it != vendas.end(); it++)
+    for (auto &i : vendas)
     {
-        cout << it->nome << " ";
-        cout << it->quantidade << endl;
-        totalItem = it->preco * it->quantidade;
+        cout << i.nome << " ";
+        cout << i.quantidade << endl;
+        totalItem = i.preco * i.quantidade;
         total += totalItem;
     }
 
@@ -119,26 +120,26 @@ void Estabelecimento::carregarEstoque()
     Produto produto;
     string row;
 
-    getline(file_stream_out, row); //Descarta primeira linha com o cabeçalho
+    std::getline(file_stream_out, row); //Descarta primeira linha com o cabeçalho
 
-    while (getline(file_stream_out, row))
+    while (std::getline(file_stream_out, row))
     {
         stringstream line_stream(row);
         string word;
 
-        getline(line_stream, word, ',');
+        std::getline(line_stream, word, ',');
         produto.codigo = stoi(word);
 
-        getline(line_stream, word, ',');
+        std::getline(line_stream, word, ',');
         produto.nome = word;
 
-        getline(line_stream, word, ',');
+        std::getline(line_stream, word, ',');
         produto.unidadeMedida = word;
 
-        getline(line_stream, word, ',');
+        std::getline(line_stream, word, ',');
         produto.preco = stod(word.substr(3, word.length() - 1));
 
-        getline(line_stream, word, ',');
+        std::getline(line_stream, word, ',');
         produto.quantidade = stoi(word);
 
         produtos.push_back(produto);
@@ -195,7 +196,7 @@ void Estabelecimento::gerarCaixa()
 
 void Estabelecimento::atualizarEstoque()
 {
-    ofstream file_stream_in("estoque_atualizado.csv"); //ofstream: Stream class to write into files
+    ofstream file_stream_in("estoque.csv"); //ofstream: Stream class to write into files
 
     file_stream_in << "COD,PRODUTO,UNIDADE DE MEDIDA,PREÇO(R$),QUANTIDADE" << endl;
 

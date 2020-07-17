@@ -1,8 +1,7 @@
 #ifndef FORNECEDOR_HPP
 #define FORNECEDOR_HPP
 
-#include <vector>
-
+#include "vector_supermercado.hpp"
 #include "produto.hpp"
 #include "estabelecimento.hpp"
 
@@ -11,7 +10,7 @@ using namespace std;
 class Fornecedor
 {
     public:
-    vector<Produto> produtos;
+    vector_supermercado<Produto> produtos;
 
     Fornecedor();
     ~Fornecedor();

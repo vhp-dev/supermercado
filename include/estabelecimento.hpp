@@ -2,17 +2,17 @@
 #define ESTABELECIMENTO_HPP
 
 #include "produto.hpp"
+#include "vector_supermercado.hpp"
 
 #include <list>
-#include <vector>
 
 class Estabelecimento
 {
     public:
     Estabelecimento();
     ~Estabelecimento();
-    list<Produto> produtos;
-    vector<Produto> vendas;
+    vector_supermercado<Produto> produtos;
+    vector_supermercado<Produto> vendas;
 
     void listar(); //Lista os produtos disponíveis
     void vender(int codigo); //Verifica se há produto no estoque ? sucesso e escreve no arquivo de saida : insucesso
