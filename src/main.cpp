@@ -2,7 +2,7 @@
 
 int main(int argc, char const *argv[])
 {
-    Estabelecimento supermercado;
+    Supermercado supermercado;
     Cliente cliente;
     Fornecedor fornecedor;
     

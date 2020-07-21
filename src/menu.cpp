@@ -2,10 +2,12 @@
 
 using namespace std;
 
-Menu::Menu(Estabelecimento &supermercado, Cliente &cliente, Fornecedor &fornecedor) : supermercado(supermercado), cliente(cliente), fornecedor(fornecedor)
+Menu::Menu(Supermercado &supermercado, Cliente &cliente, Fornecedor &fornecedor) : supermercado(supermercado), cliente(cliente), fornecedor(fornecedor)
 {
     
 }
+
+//TODO: Ajeitar a entrada para compra
 
 void Menu::show_options()
 {
@@ -41,6 +43,7 @@ void Menu::actions()
 {
     char opcao;
     char novoCliente;
+    int codigoProduto;
 
     do
     {
@@ -65,7 +68,9 @@ void Menu::actions()
         }
         else if (opcao == '3')
         {
-            cliente.comprar(supermercado);
+            cout << "Digite o codigo: ";
+            cin >> codigoProduto;
+            cliente.comprar(supermercado, codigoProduto);
         }
         else if (opcao == '4')
         {

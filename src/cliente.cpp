@@ -27,20 +27,10 @@ void Cliente::adicionarSaldo()
     cout << "Saldo atual do cliente é: " << this->saldo << endl;
 }
 
-void Cliente::comprar(Estabelecimento &supermercado)
-{
-    int codigoProduto;
-    cout << "Digite o codigo do produto: ";
-    cin >> codigoProduto;
-    comprar(supermercado, codigoProduto);
-}
-
-void Cliente::comprar(Estabelecimento &supermercado, int codigo)
+void Cliente::comprar(Supermercado &supermercado, int codigo)
 {
     bool naSacola;
     Produto produtoSacola;
-
-    
 
     for (auto &it : supermercado.produtos)
     {
@@ -92,6 +82,67 @@ void Cliente::comprar(Estabelecimento &supermercado, int codigo)
                         produtoSacola.codigo = it.codigo;
                         produtoSacola.nome = it.nome;
                         produtoSacola.unidadeMedida = it.unidadeMedida;
+                        produtoSacola.preco = it.preco;
+                        produtoSacola.quantidade = 1;
+
+                        sacola.push_back(produtoSacola);
+                    }
+                }
+
+                it.quantidade -= 1;
+                saldo -= it.preco;
+            }
+        }
+    }
+    return;
+}
+
+void Cliente::comprar(Restaurante &restaurante, string nome, int quantidade)
+{
+    bool naSacola;
+    Produto produtoSacola;
+
+    for (auto &it : restaurante.produtos)
+    {
+        if (it.nome == nome)
+        {
+            if (it.preco > saldo)
+            {
+                cout << "Saldo insuficiente." << endl;
+                return;
+            }
+            else
+            {
+                restaurante.vender(nome, quantidade);
+
+                if (sacola.empty())
+                {
+                    produtoSacola.nome = it.nome;
+                    produtoSacola.preco = it.preco;
+                    produtoSacola.quantidade = 1;
+
+                    sacola.push_back(produtoSacola);
+                    naSacola = true;
+                }
+                else
+                {
+                    for (auto &i : sacola)
+                    {
+                        if (i.nome == nome)
+                        {
+                            i.quantidade += 1;
+                            naSacola = true;
+
+                            break;
+                        }
+                        else
+                        {
+                            naSacola = false;
+                        }
+                    }
+                    if (naSacola == false)
+                    {
+                        produtoSacola.nome = it.nome;
                         produtoSacola.preco = it.preco;
                         produtoSacola.quantidade = 1;
 

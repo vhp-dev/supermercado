@@ -33,7 +33,7 @@ void Fornecedor::listarProdutos()
     return;
 }
 
-void Fornecedor::repassarProdutos(Estabelecimento &supermercado)
+void Fornecedor::repassarProdutos(Supermercado &supermercado)
 {
     string nomeProduto;
     int quantidade;

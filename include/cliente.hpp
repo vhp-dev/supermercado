@@ -2,7 +2,8 @@
 #define CLIENTE_HPP
 
 #include "produto.hpp"
-#include "estabelecimento.hpp"
+#include "supermercado.hpp"
+#include "restaurante.hpp"
 
 #include <string>
 
@@ -19,8 +20,8 @@ class Cliente
     static int idCliente;
 
     void adicionarSaldo(); //Adiciona valor ao saldo do cliente
-    void comprar(Estabelecimento &supermercado);
-    void comprar(Estabelecimento &supermercado, int codigo); //Recece produto e preco, cliente tem saldo ? compra (add na sacola) e diminui saldo : emite aviso
+    void comprar(Supermercado &supermercado, int codigo); //Recece produto e preco, cliente tem saldo ? compra (add na sacola) e diminui saldo : emite aviso
+    void comprar(Restaurante &restaurante, string nome, int quantidade);
     void verSacola(); //Mostra o que tem na sacola
     void registrar(); //Escreve o conteudo da sacola no arqv. cliente_x.txt (x é o numero do cliente)
 };
