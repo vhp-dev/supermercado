@@ -5,16 +5,18 @@
 
 class Supermercado : public Estabelecimento
 {
-    public:
-        Supermercado();
-        ~Supermercado();
+public:
+    Supermercado();
+    ~Supermercado();
 
-        void atualizarEstoque(); //Gera o arquivo estoque.csv atualizado
-        void carregar();
-        void gerarCaixa();
-        void listar();
-        void reabastecer(string nomeProduto, int quantidade); //esse método é responsável por pegar os produtos na classe Fornecedor e reabastecer o estoque.csv
-        void vender(int codigo);
+    void atualizarEstoque(); //Gera o arquivo estoque.csv atualizado
+    void carregar();
+    void gerarCaixa();
+    void listar();
+    void reabastecer(string nomeProduto, int quantidade); //esse método é responsável por pegar os produtos na classe Fornecedor e reabastecer o estoque.csv
+    void vender(int codigo);
+
+    bool ha_produto(int codigo); //Verifica se trabalha com esse produto ? true : false
 };
 
 #endif // !SUPERMERCADO_HPP

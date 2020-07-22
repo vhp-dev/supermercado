@@ -2,5 +2,4 @@
 
 Produto::Produto() : quantidade(0)
 {
-    
 }

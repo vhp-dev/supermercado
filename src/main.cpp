@@ -1,14 +1,10 @@
-#include "menu.hpp"
+#include "menuGeral.hpp"
 
 int main(int argc, char const *argv[])
 {
-    Supermercado supermercado;
-    Cliente cliente;
-    Fornecedor fornecedor;
-    
-    Menu menu(supermercado, cliente, fornecedor);
+    MenuGeral menu;
 
-    menu.actions();
-    
+    menu.show_options();
+
     return 0;
 }

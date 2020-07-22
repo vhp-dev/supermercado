@@ -37,7 +37,3 @@ void Estabelecimento::caixa()
     cout << " ==> Total vendido: " << fixed << setprecision(2) << total << endl;
     return;
 }
-
-
-
-

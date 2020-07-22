@@ -30,7 +30,8 @@ void Supermercado::listar()
             cout << "Código: " << it.codigo << endl;
             cout << "Nome do produto: " << it.nome << endl;
             cout << "Unidade de medida: " << it.unidadeMedida << endl;
-            cout << "Preço: " << "R$ " << fixed << setprecision(2) <<it.preco << endl;
+            cout << "Preço: "
+                 << "R$ " << fixed << setprecision(2) << it.preco << endl;
             cout << "Quantidade em estoque: " << it.quantidade << endl;
             cout << endl;
         }
@@ -88,13 +89,13 @@ void Supermercado::vender(int codigo)
     {
         if (it.codigo == codigo)
         {
-           if (it.quantidade == 0)
+            if (it.quantidade == 0)
             {
                 cout << "Produto fora de estoque." << endl;
-            }    
+            }
             else
             {
-                 if (vendas.empty())
+                if (vendas.empty())
                 {
                     produtoVenda.codigo = it.codigo;
                     produtoVenda.nome = it.nome;
@@ -119,8 +120,7 @@ void Supermercado::vender(int codigo)
                         else
                         {
                             emVendas = false;
-
-                        }                    
+                        }
                     }
                     if (emVendas == false)
                     {
@@ -135,7 +135,7 @@ void Supermercado::vender(int codigo)
                 }
             }
         }
-    } 
+    }
 }
 
 void Supermercado::gerarCaixa()
@@ -165,7 +165,6 @@ void Supermercado::gerarCaixa()
 
     file_stream_in << total << endl;
 
-
     file_stream_in.close();
 }
 
@@ -180,6 +179,16 @@ void Supermercado::reabastecer(string nomeProduto, int quantidade)
     }
 
     return;
+}
+
+bool Supermercado::ha_produto(int codigo)
+{
+    for (auto &i : produtos)
+    {
+        if (i.codigo == codigo)
+            return true;
+    }
+    return false;        
 }
 
 void Supermercado::atualizarEstoque()

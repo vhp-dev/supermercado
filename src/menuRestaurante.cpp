@@ -1,45 +1,36 @@
-#include "menu.hpp"
+#include "menuRestaurante.hpp"
 
 using namespace std;
 
-Menu::Menu(Supermercado &supermercado, Cliente &cliente, Fornecedor &fornecedor) : supermercado(supermercado), cliente(cliente), fornecedor(fornecedor)
+MenuRestaurante::MenuRestaurante(Restaurante &restaurante, Cliente &cliente) : restaurante(restaurante),
+                                                                               cliente(cliente)
 {
-    
 }
 
-//TODO: Ajeitar a entrada para compra
-
-void Menu::show_options()
+void MenuRestaurante::show_options_Restaurante()
 {
-    cout << "++++++++++++++++++++++++++++++  MENU  ++++++++++++++++++++++++++++++" << endl;
+    cout << "++++++++++++++++++++++++++++++  MENU RESTAURANTE ++++++++++++++++++++++++++++++" << endl;
     cout << endl;
 
     cout << "1 - Adicionar saldo para o cliente." << endl;
     cout << endl;
 
-    cout << "2 - Listar os produtos disponiveis na loja." << endl;
+    cout << "2 - Listar os produtos disponíveis no cardápio." << endl;
     cout << endl;
 
-    cout << "3 - Adicionar produto a sacola (Efetua a compra)." << endl;
+    cout << "3 - Fazer um pedido." << endl;
     cout << endl;
 
-    cout << "4 - Verificar o conteúdo da sacola." << endl;
+    cout << "4 - Verificar o que tem na conta do cliente (produtos já pedidos)." << endl;
     cout << endl;
 
-    cout << "5 - Listar produtos do fornecedor." << endl;
-    cout << endl;
-
-    cout << "6 - Solicitar o reabastecimento de um produto." << endl;
-    cout << endl;
-
-    cout << "9 - Finalizar compras." << endl;
+    cout << "9 - Finalizar pedidos e sair do restaurante." << endl;
     cout << endl;
 
     cout << "Digite a opção desejada: ";
-
 }
 
-void Menu::actions()
+void MenuRestaurante::actions_Restaurante()
 {
     char opcao;
     char novoCliente;
@@ -54,7 +45,7 @@ void Menu::actions()
         cout << "------------------------------------" << endl;
         cout << endl;
 
-        show_options();
+        show_options_Restaurante();
 
         cin >> opcao;
 
@@ -64,25 +55,15 @@ void Menu::actions()
         }
         else if (opcao == '2')
         {
-            supermercado.listar();
+            restaurante.listar();
         }
         else if (opcao == '3')
         {
-            cout << "Digite o codigo: ";
-            cin >> codigoProduto;
-            cliente.comprar(supermercado, codigoProduto);
+            cliente.comprar_restaurante(restaurante);
         }
         else if (opcao == '4')
         {
             cliente.verSacola();
-        }
-        else if (opcao == '5')
-        {
-            fornecedor.listarProdutos();
-        }
-        else if (opcao == '6')
-        {
-            fornecedor.repassarProdutos(supermercado);
         }
         else if (opcao == '9')
         {
@@ -104,6 +85,8 @@ void Menu::actions()
         else
         {
             cout << "Opção inválida!" << endl;
+            cin.clear();
+            cin.ignore(100, '\n');
         }
     } while (opcao != 0);
 }

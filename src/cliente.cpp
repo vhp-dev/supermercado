@@ -23,8 +23,32 @@ void Cliente::adicionarSaldo()
 
     cout << "Digite valor a ser adicionado ao saldo: ";
     cin >> valor;
+
+    if (valor < 0)
+    {
+        cout << endl
+             << "Não pode adicionar valores negativos. Tente novamente." << endl;
+        return;
+    }
+
     this->saldo += valor;
     cout << "Saldo atual do cliente é: " << this->saldo << endl;
+
+    return;
+}
+
+void Cliente::comprar_supermercado(Supermercado &supermercado)
+{
+    int codigoProduto;
+
+    cout << "Digite o codigo: ";
+    cin >> codigoProduto; // verificar existencia
+
+    if (supermercado.ha_produto(codigoProduto))
+        comprar(supermercado, codigoProduto);
+    else
+        cout << endl
+             << "Esse código não corresponde a um produto" << endl;
 }
 
 void Cliente::comprar(Supermercado &supermercado, int codigo)
@@ -94,7 +118,44 @@ void Cliente::comprar(Supermercado &supermercado, int codigo)
             }
         }
     }
+
     return;
+}
+
+void Cliente::comprar_restaurante(Restaurante &restaurante)
+{
+    int quantidadeProduto;
+    string nomeProduto;
+
+    cout << "Digite o nome do produto: ";
+    cin.ignore();
+    getline(cin, nomeProduto);
+
+    if (!restaurante.ha_produto(nomeProduto))
+    {
+        cout << endl
+             << "O restaurante não trabalha com " << nomeProduto << ". Tente novamente." << endl;
+        return;
+    }
+
+    cout << "Digite a quantidade de " << nomeProduto << " que deseja comprar: ";
+    cin >> quantidadeProduto; //Se entrar com uma letra quebra o programa
+    if (cin.fail())
+    {
+        cout << "A quantidade deve ser um numero." << endl;
+        cin.clear();
+        cin.ignore(100, '\n');
+        return;
+    }
+
+    if (quantidadeProduto < 1)
+    {
+        cout << endl
+             << "Quantidade tem que ser maior do que 0. Tente novamente." << endl;
+        return;
+    }
+
+    comprar(restaurante, nomeProduto, quantidadeProduto);
 }
 
 void Cliente::comprar(Restaurante &restaurante, string nome, int quantidade)
@@ -106,7 +167,7 @@ void Cliente::comprar(Restaurante &restaurante, string nome, int quantidade)
     {
         if (it.nome == nome)
         {
-            if (it.preco > saldo)
+            if (it.preco * quantidade > saldo) //VERIFICAR
             {
                 cout << "Saldo insuficiente." << endl;
                 return;
@@ -119,7 +180,7 @@ void Cliente::comprar(Restaurante &restaurante, string nome, int quantidade)
                 {
                     produtoSacola.nome = it.nome;
                     produtoSacola.preco = it.preco;
-                    produtoSacola.quantidade = 1;
+                    produtoSacola.quantidade = quantidade; //VERIFICAR
 
                     sacola.push_back(produtoSacola);
                     naSacola = true;
@@ -130,7 +191,7 @@ void Cliente::comprar(Restaurante &restaurante, string nome, int quantidade)
                     {
                         if (i.nome == nome)
                         {
-                            i.quantidade += 1;
+                            i.quantidade += quantidade; //VERIFICAR
                             naSacola = true;
 
                             break;
@@ -144,14 +205,14 @@ void Cliente::comprar(Restaurante &restaurante, string nome, int quantidade)
                     {
                         produtoSacola.nome = it.nome;
                         produtoSacola.preco = it.preco;
-                        produtoSacola.quantidade = 1;
+                        produtoSacola.quantidade = quantidade; //VERIFICAR
 
                         sacola.push_back(produtoSacola);
                     }
                 }
 
-                it.quantidade -= 1;
-                saldo -= it.preco;
+                // it.quantidade -= quantidade; //VERIFICAR
+                saldo -= quantidade * it.preco; //VERIFICAR
             }
         }
     }

@@ -52,7 +52,8 @@ void Fornecedor::repassarProdutos(Supermercado &supermercado)
                 cout << "Quantidade inválida!" << endl;
                 return;
             }
-            if(quantidade > i.quantidade){
+            if (quantidade > i.quantidade)
+            {
                 cout << "Quantidade superior ao que o fornecedor possui. O reabastecimento não foi realizado." << endl;
                 return;
             }

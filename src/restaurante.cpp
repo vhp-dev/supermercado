@@ -4,7 +4,6 @@
 #include <sstream>
 #include <string>
 
-
 #include "restaurante.hpp"
 
 using namespace std;
@@ -22,20 +21,15 @@ Restaurante::~Restaurante()
 
 void Restaurante::listar()
 {
-    cout << "==============================  PRODUTOS  ==============================" << endl;
     cout << endl;
+    cout << "==============================  PRODUTOS  ==============================" << endl;
+    cout << "NOME DO PRODUTO | PREÇO" << endl;
 
     for (auto &it : produtos)
     {
-        if (it.quantidade > 0)
-        {
-            cout << "Nome do produto: " << it.nome << endl;
-            cout << "Preço: "
-                 << "R$ " << fixed << setprecision(2) << it.preco << endl;
-            cout << endl;
-        }
+        cout << it.nome << " | "
+             << "R$ " << fixed << setprecision(2) << it.preco << endl;
     }
-
     cout << "========================================================================" << endl;
     cout << endl;
 }
@@ -75,6 +69,7 @@ void Restaurante::carregar()
 
     while (std::getline(file_stream_out, row))
     {
+
         stringstream line_stream(row);
         string word;
 
@@ -105,7 +100,7 @@ void Restaurante::vender(string nome, int quantidade)
             {
                 produtoVenda.nome = it.nome;
                 produtoVenda.preco = it.preco;
-                produtoVenda.quantidade = 1;
+                produtoVenda.quantidade = quantidade; //VERIFICAR
 
                 vendas.push_back(produtoVenda);
                 emVendas = true;
@@ -116,7 +111,7 @@ void Restaurante::vender(string nome, int quantidade)
                 {
                     if (i.nome == nome)
                     {
-                        i.quantidade += 1;
+                        i.quantidade += quantidade; //VERIFICAR
                         emVendas = true;
 
                         break;
@@ -130,11 +125,21 @@ void Restaurante::vender(string nome, int quantidade)
                 {
                     produtoVenda.nome = it.nome;
                     produtoVenda.preco = it.preco;
-                    produtoVenda.quantidade = 1;
+                    produtoVenda.quantidade = quantidade; //VERIFICAR
 
                     vendas.push_back(produtoVenda);
                 }
             }
         }
     }
+}
+
+bool Restaurante::ha_produto(string nome)
+{
+    for (auto &i : produtos)
+    {
+        if (i.nome == nome)
+            return true;
+    }
+    return false;        
 }
