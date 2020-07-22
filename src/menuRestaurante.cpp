@@ -1,4 +1,5 @@
 #include "menuRestaurante.hpp"
+#include <exception>
 
 using namespace std;
 
@@ -32,9 +33,10 @@ void MenuRestaurante::show_options_Restaurante()
 
 void MenuRestaurante::actions_Restaurante()
 {
-    char opcao;
+    int opcao;
     char novoCliente;
     int codigoProduto;
+    cliente.tipoCliente = 2;
 
     do
     {
@@ -49,23 +51,36 @@ void MenuRestaurante::actions_Restaurante()
 
         cin >> opcao;
 
-        if (opcao == '1')
+        try
+        {
+            if (cin.fail())
+            {
+                string temp = "Entrada de dados inválidas: Falhou no tipo ";
+                throw(string(temp));
+            }
+        }
+        catch (const string e)
+        {
+            std::cerr << e << '\n';
+        }
+
+        if (opcao == 1)
         {
             cliente.adicionarSaldo();
         }
-        else if (opcao == '2')
+        else if (opcao == 2)
         {
             restaurante.listar();
         }
-        else if (opcao == '3')
+        else if (opcao == 3)
         {
             cliente.comprar_restaurante(restaurante);
         }
-        else if (opcao == '4')
+        else if (opcao == 4)
         {
             cliente.verSacola();
         }
-        else if (opcao == '9')
+        else if (opcao == 9)
         {
             cout << "Inicializar novo cliente? (S/N)" << endl;
             cin >> novoCliente;

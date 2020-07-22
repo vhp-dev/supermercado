@@ -41,6 +41,7 @@ void MenuSupermercado::actions()
 {
     char opcao;
     char novoCliente;
+    cliente.tipoCliente = 1;
 
     do
     {

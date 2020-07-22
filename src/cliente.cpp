@@ -4,6 +4,7 @@
 #include <fstream>
 
 int Cliente::idCliente = 0;
+int Cliente::tipoCliente = 0;
 
 Cliente::Cliente() : sacola(), saldo()
 {
@@ -242,7 +243,18 @@ void Cliente::verSacola()
 
 void Cliente::registrar()
 {
-    ofstream file_stream_in("cliente_" + to_string(idCliente) + ".txt"); //ofstream: Stream class to write into files
+    string qualCliente;
+
+    if (tipoCliente == 1)
+    {
+        qualCliente = "supermercado";
+    }
+    else if (tipoCliente == 2)
+    {
+        qualCliente = "restaurante";
+    }
+
+    ofstream file_stream_in(qualCliente + "_cliente_" + to_string(idCliente) + ".txt"); //ofstream: Stream class to write into files
 
     for (auto &i : sacola)
     {
